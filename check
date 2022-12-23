@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>校验</title>
+</head>
+<script>
+
+    function checkFrm() {
+        checkuser();
+        checkPwd();
+        checkPwd2();
+        return checkPwd()&&checkPwd2()&&checkuser();
+    }
+    function checkuser(){
+        var usernameValue = document.getElementById("username").value;
+        var span = document.getElementById("usernamespan");
+        if (document.getElementById("username").value.length==0) {
+            span.innerHTML="username can not be noll";
+            span.style.color="red";
+            return false;
+        }
+    }
+    function checkPwd() {
+        var upwd = document.getElementById("pwd").value;
+        var reg = /^[a-z]\w{5,7}$/;
+        var span = document.getElementById("pwdSpan");
+        if (document.getElementById("pwd").value.length==0) {
+            span.innerHTML = "password can not be null";
+            span.style.color = "red";
+            return false;
+        } else if (reg.test(upwd)) {
+            span.innerHTML = "password pass";
+            span.style.color = "green";
+            return true;
+        } else {
+            span.innerHTML = "password format mismatch"
+            span.style.color = "red";
+            return false;
+        }
+        checkPwd2();
+    }
+    function checkPwd2() {
+        var pwd = document.getElementById("pwd").value;
+        var pwd2 = document.getElementById("pwd2").value;
+        var span = document.getElementById("pwd2Span");
+        if (document.getElementById("pwd2").value.length==0) {
+            span.innerHTML = "password can not be null";
+            span.style.color = "red";
+            return false;
+        } else if (pwd === pwd2) {
+            span.innerHTML = "password pass";
+            span.style.color = "green";
+            return true;
+        } else {
+            span.innerHTML = '"password"and"confirm password" must match!'
+            span.style.color = "red";
+            return false;
+        }
+    }
+</script>
+<style>
+
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        border-radius: 50px;
+    }
+
+    body {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .rg_layout {
+        width: 600px;
+        height: 500px;
+        margin:auto;
+        background-color:darkgrey;
+        border: 4px solid #e8ecf0;
+        margin-top: 30px;
+    }
+
+    .rg_center {
+
+        width: 450px;
+        float: left;
+        margin-top: 100px;
+    }
+
+    .td_left {
+        width: 200px;
+        text-align: right;
+        height: 45px;
+    }
+
+    .td_right {
+
+        padding-left: 15px;
+    }
+
+    #username,
+    #pwd2,
+    #pwd{
+        width: 251px;
+        height: 32px;
+        border: 1px solid aliceblu;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+
+    #btn-sub {
+        width: 200px;
+        height: 40px;
+        background-color:aliceblue;
+        border: 1px solid aliceblu;
+        border-radius:inherit;
+        margin-top: 60px;
+    }
+
+</style>
+<body>
+<div class="rg_layout">
+
+    <div class="rg_center">
+        <form action="#" method="get" onsubmit="return checkFrm()">
+            <table>
+                <tbody>
+                <tr>
+                    <td class="td_left">
+                        <label>Username:</label>
+                    </td>
+                    <td class="td_right">
+                        <input type="text" name="username" id="username" value="" placeholder="please enter your username" onblur="checkuser()">
+                        <span id="usernamespan"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_left">
+                        <label> Password: </label>
+                    </td>
+                    <td class="td_right">
+                        <input type="password" name="pwd" id="pwd" value="" placeholder="please enter your password" onblur="checkPwd()">
+                        <span id="pwdSpan"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_left">
+                        <label>Confirm assword:</label>
+                    </td>
+                    <td class="td_right">
+                        <input type="password" name="pwd2" id="pwd2" value="" placeholder="please enter your password again" onblur=" checkPwd2()">
+                        <span id="pwd2Span"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <br>
+                    <td colspan="6" align="center" ><input type="submit" value="注册" id="btn-sub"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
